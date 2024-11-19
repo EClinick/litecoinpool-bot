@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  discord-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - DISCORD_TOKEN=${DISCORD_TOKEN}
+      - CHANNEL_ID=${CHANNEL_ID}
+      - LITECOINPOOL_API_KEY=${LITECOINPOOL_API_KEY}
+      - POWER_USAGE=${POWER_USAGE}
+      - ENERGY_COST_PER_KWH=${ENERGY_COST_PER_KWH}
+      - HOURS_PER_DAY=${HOURS_PER_DAY}
+    volumes:
+      - .:/app
+    command: python -m debugpy --listen 0.0.0.0:5678 discord_bot.py
+    ports:
+      - "5678:5678"  # Debug port
+    restart: unless-stopped
+    develop:
+      watch:
+        - action: sync
+          path: .
+          target: /app
+          ignore:
+            - ".git/"
+            - ".env"
+            - "__pycache__/"
+            - "*.pyc"
+            - "*.log"
+        - action: rebuild
+          path: requirements.txt 
