@@ -163,8 +163,7 @@ HOURS_PER_DAY=24
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/crypto-discord-bot.git
-   cd crypto-discord-bot
+   git clone https://github.com/yourusername/litecoinpool-bot.git
    ```
 
 2. **Create and activate virtual environment:**
